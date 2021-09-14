@@ -1,0 +1,36 @@
+// LẤY DỮ LIỆU
+const GET_ALL_PRODUCT = 'products/GET_ALL_PRODUCT';
+const GET_SREACH_PRODUCT = 'products/GET_SREACH_PRODUCT';
+const STORE_PRODUCT = 'products/STORE_PRODUCT';
+
+// TẠO MỚI
+const POST_CREATE_PRODUCT = 'products/POST_CREATE_PRODUCT';
+
+// CẬP NHẬP
+const POST_EDIT_PRODUCT = 'products/POST_EDIT_PRODUCT';
+const STORE_PRODUCT_EDIT = 'products/STORE_PRODUCT_EDIT';
+const POST_UPDATE_PRODUCT = 'products/POST_UPDATE_PRODUCT';
+
+// XÓA
+const POST_DELETE_PRODUCT = 'products/POST_DELETE_PRODUCT';
+
+// TRƯỜNG HỢP
+const SUCCESS = 'products/SUCCESS';
+const FAIL = 'products/FAIL';
+
+export default {
+    GET_ALL_PRODUCT,
+    GET_SREACH_PRODUCT,
+    STORE_PRODUCT,
+
+    POST_CREATE_PRODUCT,
+
+    POST_EDIT_PRODUCT,
+    STORE_PRODUCT_EDIT,
+    POST_UPDATE_PRODUCT,
+
+    POST_DELETE_PRODUCT,
+
+    SUCCESS,
+    FAIL
+};

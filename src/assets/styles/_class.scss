@@ -1,0 +1,53 @@
+#dropDown {
+    &:hover {
+        .drop-content {
+            display: block;
+        }
+    }
+}
+
+$warning: #faad14;
+.hover-yellow {
+    &:hover {
+        color: $warning;
+    }
+}
+
+.pt-header {
+    padding-top: 65px;
+}
+
+.line-height {
+    line-height: 64px;
+}
+
+#bg-login {
+    background-image: url('https://st.quantrimang.com/photos/image/2020/07/02/anh-chup-dai-ngan-ha-19.jpg');
+}
+
+$bg: #1A1A27;
+$bg2: #1E1E2D;
+$bg3: #EEF0F8;
+.bg-navigation {
+    background-color: $bg;
+}
+.bg-navigation2 {
+    background-color: $bg2;
+}
+.bg-dashboard {
+    background-color: $bg3;
+}
+
+$primary: #1890ff;
+.add {
+    background-color:$primary;
+}
+
+$bg-suc: #1aff1a;
+.bg-success {
+    background-color: $bg-suc;
+}
+
+.bg-background-image {
+    background-image: url('../image/bg/bg-2.jpg');
+}
