@@ -7,6 +7,7 @@ import { evaluateActions, evaluateSelectors } from '../../../../state/modules/ev
 const EvaluateProd = () => {
     const IDprod = useParams();
     const dispatch = useDispatch();
+    const loading = useSelector(evaluateSelectors.loading);
     const [stars, setStars] = useState();
     const [textInput, setTextInput] = useState();
     const [name, setName] = useState();
@@ -75,7 +76,7 @@ const EvaluateProd = () => {
                     </span>
                 </div>
             </div>
-            <h1 className='font-medium text-2xl text-gray-600'>Đánh giá sản phẩm</h1>
+            <h1 className='font-medium xl:text-2xl text-xl text-gray-600'>Đánh giá sản phẩm</h1>
             <div className='border rounded-xl p-6 my-3'>
                 <div className='block'>
                     <div className='text-lg my-1'>
@@ -154,11 +155,13 @@ const EvaluateProd = () => {
                             </form>
                         </div>
                     </div>
-
                 </div>
             </div>
             <hr className='my-6' />
             <div className='px-6'>
+                {
+                    loading ? (<div className='text-center text-xl font-medium'>Đang tải.....</div>) : ''
+                }
                 {
                     (listEval && listEval.length > 0)
                         ? listEval.map((item, index) => (
@@ -187,7 +190,7 @@ const EvaluateProd = () => {
                                 </div>
                             </div>
                         ))
-                        : <h1 className='text-2xl text-center text-red-500 font-semibold'>( Trống!!!! )</h1>
+                        : <h1 className='text-2xl text-center text-red-500 font-semibold'>{loading ? '' : '( Trống!!!! )'}</h1>
                 }
             </div>
         </div>

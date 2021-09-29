@@ -12,6 +12,7 @@ const Index = () => {
     const dispatch = useDispatch();
     const [categoryList, setCategory] = useState([]);
     const category = useSelector(categorySelectors.categories);
+    const loading = useSelector(categorySelectors.loading);
 
     useEffect(() => {
         setCategory(category);
@@ -34,7 +35,7 @@ const Index = () => {
             <div className='min-h-screen flex flex-col flex-auto flex-shrink-0 antialiased bg-white dark:bg-gray-700 text-black dark:text-white'>
                 <Header />
                 <Sliderbar />
-                <ListCatergory categoryList={categoryList} />
+                <ListCatergory categoryList={categoryList} loading={loading} />
             </div>
         </div>
     );

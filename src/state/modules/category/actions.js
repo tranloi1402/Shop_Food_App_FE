@@ -22,6 +22,7 @@ const getAllCate = createAction(types.ALL_CATE);
 const storeCate = createAction(types.STORE_CATE);
 const success = createAction(types.SUCCESS);
 const fail = createAction(types.FAIL);
+const loading = createAction(types.LOADING);
 
 export const actions = {
     createCate,
@@ -37,6 +38,7 @@ export const actions = {
 //= =============== SAGAS ===============//
 function* fetchCategory() {
     try {
+        yield put(loading());
         const response = yield call(Api.getAllcategory);
         yield put(storeCate(response.data));
         yield put(success());
@@ -48,7 +50,7 @@ function* fetchCategory() {
 function* createdCategory(action) {
     try {
         const res = yield call(Api.creatCatePost, action.payload);
-        console.log('[createdCategory - category]', res);
+        // console.log('[createdCategory - category]', res);
         yield put(createCateSuccess(res));
     } catch (error) {
         yield put(createCateFailure());
@@ -57,6 +59,7 @@ function* createdCategory(action) {
 
 function* editCategoryID(action) {
     try {
+        yield put(loading());
         const res = yield call(Api.editByID, action.payload);
         yield put(editIdSuccess(res.data));
         yield put(success());
@@ -67,12 +70,8 @@ function* editCategoryID(action) {
 
 function* updateCategory(action) {
     try {
-        console.log('[[updateCategory-action-payload]]', action.payload);
         const response = yield call(Api.postUpdateCate, action.payload);
-        console.log('[[updateCategory-data-Api]]', response.data);
-        const succ = yield put(updateSuccess(response.data));
-        console.log('[[success]]', succ);
-        yield put(success());
+        yield put(updateSuccess(response.data));
     } catch (error) {
         yield put(fail());
     }
@@ -80,9 +79,8 @@ function* updateCategory(action) {
 
 function* deleteCategory(action) {
     try {
-        const response = yield call(Api.postDeleteCateById, action.payload);
-        console.log('[[deleteCategory-log-req]]', response);
-        yield put(success());
+        yield call(Api.postDeleteCateById, action.payload);
+        // yield put(success(response));
     } catch (error) {
         yield put(fail());
     }

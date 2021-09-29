@@ -1,26 +1,47 @@
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 import { categoryActions } from '../../../../state/modules/category';
 import '../../../../assets/styles/_class.scss';
 
 const FormCreatCate = () => {
     const dispatch = useDispatch();
+    const history = useHistory();
     const [category, setCategory] = useState({
         name: '',
         status: '',
         title: ''
     });
+    const [message, setMessage] = useState(1);
 
-    const onSubmit = useCallback(() => {
-        // console.log('[input-cate]', category);
-        dispatch(categoryActions.createCate(category));
-    }, [category, dispatch]);
+    const onSubmit = () => {
+        if (category) {
+            dispatch(categoryActions.createCate(category));
+            setMessage(2);
+            setTimeout(() => {
+                setMessage(1);
+                history.replace('/dashboard/categorys');
+            }, 5000);
+        }
+    };
 
     return (
         <div className='h-full ml-14 mt-14 mb-10 md:ml-64'>
             <div>
                 <h2 className='ml-6 mt-4 text-xl font-semibold text-gray-500'>Thêm mới danh mục sản phẩm</h2>
+            </div>
+            <div
+                className={(message !== 1) ? 'fixed top-12 right-3 shadow-lg mt-2 z-40' : 'hidden'}
+            >
+                <div className='bg-red-100 rounded-lg mt-5 border py-2 px-4'>
+                    <i className={
+                        message === 2 ? 'far fa-check-circle pr-3 text-green-500 text-xl font-semibold'
+                            : 'fas fa-times pr-3 text-red-500 text-xl font-semibold'
+                    }
+                    />
+                    <span className='font-semibold'>{message === 2 ? 'Thêm mới thành Công!!!' : message}</span>
+                </div>
             </div>
             <div className='m-10 p-2 bg-white border rounded-xl shadow-2xl z-10'>
                 {/* <div className={isCheck ? 'w-full border bg-red-500 text-white font-medium text-xl' : 'hidden'}>
@@ -78,7 +99,7 @@ const FormCreatCate = () => {
                     </div>
                     <button
                         type='submit'
-                        className='cursor-pointer py-2 px-4 block mx-6 my-3 text-white font-bold text-center rounded add'
+                        className='cursor-pointer py-2 px-4 block mx-6 my-3 text-white font-bold text-center rounded add focus:outline-none'
                     >
                         Thêm mới
                     </button>

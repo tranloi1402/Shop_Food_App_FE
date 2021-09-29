@@ -17,6 +17,7 @@ const POST_DELETE_PRODUCT = 'products/POST_DELETE_PRODUCT';
 // TRƯỜNG HỢP
 const SUCCESS = 'products/SUCCESS';
 const FAIL = 'products/FAIL';
+const IS_LOADED = 'products/IS_LOADED';
 
 export default {
     GET_ALL_PRODUCT,
@@ -32,5 +33,6 @@ export default {
     POST_DELETE_PRODUCT,
 
     SUCCESS,
-    FAIL
+    FAIL,
+    IS_LOADED
 };

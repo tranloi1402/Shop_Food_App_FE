@@ -27,7 +27,7 @@ function ShoppingCart() {
     // Updata quantity
     const onChangeUpdate = (id, data) => {
         setCart(
-            cart.map((item) => (item._id === id ? {...item, quantity: data} : item))
+            cart.map((item) => (item._id === id ? { ...item, quantity: data } : item))
         );
     };
     // xử lý payment
@@ -134,14 +134,14 @@ function ShoppingCart() {
                     <hr className={(cart && cart.length > 0) ? 'mt-6' : 'hidden'} />
                     <div className='my-4 mr-auto md:flex md:flex-row-reverse'>
                         <div className={(cart && cart.length > 0) ? '' : 'hidden'}>
-                            <div className='flex justify-between pt-2 border-b text-red-500'>
+                            {/* <div className='flex justify-between pt-2 border-b text-red-500'>
                                 <div className='lg:px-4 lg:py-2 m-2 text-lg lg:text-xl font-bold text-center'>
                                     Tổng số tiền:
                                 </div>
                                 <div className='lg:px-4 lg:py-2 m-2 lg:text-lg font-bold text-center'>
                                     VNĐ
                                 </div>
-                            </div>
+                            </div> */}
                             <div>
                                 <button
                                     onClick={() => checkPayment()}
@@ -158,7 +158,7 @@ function ShoppingCart() {
                         </div>
                     </div>
                 </div>
-                <hr className='my-6' />
+                <hr className={isCheck ? 'my-6' : 'hidden'} />
                 <Payment
                     isCheck={isCheck}
                     onSubmitPayment={onSubmitPayment}

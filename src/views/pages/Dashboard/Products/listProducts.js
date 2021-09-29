@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import Product from './product';
 
-const ListProducts = ({ products }) => (
+const ListProducts = ({ products, loading }) => (
     <div className='h-full mt-14 mb-10 md:ml-64'>
         <div>
             <h2 className='ml-6 mt-4 text-xl font-semibold text-gray-500'>Danh sách sản phẩm</h2>
@@ -27,15 +27,29 @@ const ListProducts = ({ products }) => (
                 </tbody>
             </table>
         </div>
+        <h1 className='text-xl font-medium text-center my-10'>
+            {
+                loading ? 'Đang tải...'
+                    : (
+                        <span className='text-red-500'>
+                            {
+                                (products && products.length > 0) ? '' : '(Danh sách trống !!!)'
+                            }
+                        </span>
+                    )
+            }
+        </h1>
     </div>
 );
 
 ListProducts.propTypes = {
-    products: PropTypes.array
+    products: PropTypes.array,
+    loading: PropTypes.bool
 };
 
 ListProducts.defaultProps = {
-    products: []
+    products: [],
+    loading: null
 };
 
 export default ListProducts;

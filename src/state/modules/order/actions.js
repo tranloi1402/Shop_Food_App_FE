@@ -17,6 +17,8 @@ const updateOrder = createAction(types.UPDATE_ORDER);
 const storeOrder = createAction(types.STORE_ORDER);
 const success = createAction(types.SUCCESS);
 const fail = createAction(types.FAIL);
+const loading = createAction(types.LOADING);
+const stopLoading = createAction(types.STOP_LOADING);
 
 export const actions = {
     getAllOrders,
@@ -28,9 +30,10 @@ export const actions = {
 //= =============== SAGAS ===============//
 function* getOrders() {
     try {
+        yield put(loading());
         const response = yield call(Api.getAllOrder);
         yield put(storeOrder(response.data));
-        yield put(success());
+        yield put(stopLoading());
     } catch (error) {
         yield put(fail());
     }
@@ -39,8 +42,8 @@ function* getOrders() {
 function* postCreateOrder(action) {
     try {
         const response = yield call(Api.postCreateOrder, action.payload);
-        console.log('[[postCreateOrder data response]]', response);
-        yield put(success());
+        // console.log('[[postCreateOrder data response]]', response);
+        yield put(success(response));
     } catch (error) {
         yield put(fail());
     }
@@ -48,9 +51,10 @@ function* postCreateOrder(action) {
 
 function* getEditOrder(action) {
     try {
-        console.log(action);
+        yield put(loading());
         const response = yield call(Api.editOrder, action.payload);
         yield put(storeEdit(response.data));
+        yield put(stopLoading());
     } catch (error) {
         yield put(fail());
     }
@@ -58,9 +62,9 @@ function* getEditOrder(action) {
 
 function* postUpdateOrder(action) {
     try {
-        console.log(action.payload);
+        // console.log(action.payload);
         const res = yield call(Api.postUpdateOrder, action.payload);
-        console.log('[postUpdateOrder]', res);
+        // console.log('[postUpdateOrder]', res);
         yield put(success(res.data));
     } catch (error) {
         yield put(fail());

@@ -18,7 +18,7 @@ export const actions = {
 
 function* addCart(action) {
     try {
-        console.log('[ action-add ]', action.payload);
+        // console.log('[ action-add ]', action.payload);
         yield put(storeCart(action.payload));
         yield put(success());
     } catch (error) {

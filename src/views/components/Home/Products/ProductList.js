@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import { productActions, productSelectors } from '../../../../state/modules/product';
 import Product from './product';
 import '../../../../assets/styles/_class.scss';
+import Loading from '../../../../utils/Loadable/index';
 
 const CART_STORE_KEY = 'LIST_CART';
 
@@ -12,6 +13,8 @@ const ProductList = () => {
     const dispatch = useDispatch();
     // product
     const listProducts = useSelector(productSelectors.getAllProducts);
+    const loading = useSelector(productSelectors.loading);
+    // console.log(loading);
 
     const [cartsList, setCartList] = useState();
     // lấy về lên localStorerage
@@ -53,10 +56,9 @@ const ProductList = () => {
     const { keyword } = useParams();
     useEffect(() => {
         if (keyword) {
-            console.log(keyword);
             dispatch(productActions.getSearchPrd(keyword));
         } else {
-            dispatch(productActions.getSearchPrd(''));
+            dispatch(productActions.getAllProduct());
         }
     }, [keyword, dispatch]);
 
@@ -84,29 +86,46 @@ const ProductList = () => {
                     </span>
                 </div>
             </div>
-            <div className='container mx-auto sm:my-10 mt-20 overflow-hidden'>
-                <div className='text-center my-8'>
-                    <h1 className={keyword ? 'text-gray-700 font-medium text-3xl normal-case' : 'hidden'}>
-                        {`Kết quả tìm kiếm🔎🔎🔎: ${keyword}`}
-                    </h1>
-                    <h1 className={keyword ? 'hidden' : 'text-gray-900 font-bold text-3xl normal-case'}>
-                        Danh sách sản phẩm 🍔🍟🍕❤
-                    </h1>
+            <content className='w-full'>
+
+                <div className='sm:my-10 mt-20 overflow-hidden'>
+                    <div className='text-center my-8'>
+                        <h1 className={keyword ? 'text-gray-700 font-medium text-3xl normal-case' : 'hidden'}>
+                            {`Kết quả tìm kiếm🔎🔎🔎: ${keyword}`}
+                        </h1>
+                        <h1 className={keyword ? 'hidden' : 'text-gray-900 font-bold lg:text-3xl text-xl normal-case'}>
+                            Danh sách sản phẩm 🍔🍟🍕❤
+                        </h1>
+                    </div>
+                    <div className='text-center text-lg font-medium'>
+                        {
+                            loading ? 'Đang tải...' : ''
+                        }
+                    </div>
+                    <div className='container mx-auto'>
+                        <div className={
+                            (listProducts && listProducts.length > 0) ? 'hidden' : 'text-red-500 text-xl font-medium text-center'
+                        }
+                        >
+                            {
+                                loading ? <Loading /> : '( không có sản phẩm nào )'
+                            }
+                        </div>
+                        <div
+                            className='grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1
+                                        py-10 xl:gap-10 md:gap-5 mt-2 justify-center'
+                        >
+                            {
+                                (listProducts && listProducts.length > 0)
+                                    ? listProducts.map((product, idx) => (
+                                        <Product key={idx} product={product} addToCart={addToCart} />
+                                    ))
+                                    : ''
+                            }
+                        </div>
+                    </div>
                 </div>
-                <div className={
-                    (listProducts && listProducts.length > 0) ? 'hidden' : 'text-red-500 text-xl font-medium text-center'
-                }
-                >
-                    ( không có sản phẩm nào )
-                </div>
-                <div className='grid justify-items-center mx-auto lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 py-10 gap-10 mt-2'>
-                    {
-                        listProducts && listProducts.map((product, idx) => (
-                            <Product key={idx} product={product} addToCart={addToCart} />
-                        ))
-                    }
-                </div>
-            </div>
+            </content>
         </>
     );
 };

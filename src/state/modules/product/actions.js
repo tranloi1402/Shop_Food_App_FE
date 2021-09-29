@@ -19,6 +19,7 @@ const deleteProduct = createAction(types.POST_DELETE_PRODUCT);
 
 const success = createAction(types.SUCCESS);
 const fail = createAction(types.FAIL);
+const isLoading = createAction(types.IS_LOADED);
 
 export const actions = {
     // all-data
@@ -39,9 +40,10 @@ export const actions = {
 //= =============== SAGAS ===============//
 function* fecthAllProduct() {
     try {
-        const response = yield call(Api.getAllProduct, action.payload);
-        console.log(response);
+        yield put(isLoading());
+        const response = yield call(Api.getAllProduct);
         yield put(storeProduct(response.data));
+        yield put(success());
     } catch (error) {
         yield put(fail());
     }
@@ -49,9 +51,10 @@ function* fecthAllProduct() {
 
 function* getSreach(action) {
     try {
+        yield put(isLoading());
         const response = yield call(Api.getSreach, action.payload);
-        console.log(response);
         yield put(storeProduct(response.data));
+        yield put(success());
     } catch (error) {
         yield put(fail());
     }
@@ -59,10 +62,10 @@ function* getSreach(action) {
 
 function* fecthCreateProduct(action) {
     try {
-        console.log('[[action.payload]]', action.payload);
+        // console.log('[[action.payload]]', action.payload);
         const res = yield call(Api.postCreateProduct, action.payload);
         console.log('[[ New - Create - Product ]]', res);
-        yield put(success(res));
+        yield put(success());
         // console.log('[[[ a ]]]', a);
     } catch (error) {
         yield put(fail());
@@ -71,10 +74,9 @@ function* fecthCreateProduct(action) {
 
 function* postEditProduct(action) {
     try {
-        // console.log('[[ action.payload ]]', action.payload);
+        yield put(isLoading());
         const res = yield call(Api.postEditProduct, action.payload);
-        // console.log('aaaaaaaa');
-        // console.log('[[ postEditProduct - data ]]', res.data);
+        console.log('[[ postEditProduct - data ]]', res.data);
         yield put(storeEditProduct(res.data));
         yield put(success());
     } catch (error) {
@@ -85,8 +87,8 @@ function* postEditProduct(action) {
 function* postUpdateProduct(action) {
     try {
         const res = yield call(Api.postUpdateProduct, action.payload);
-        console.log(res);
-        yield put(success());
+        // console.log(res);
+        yield put(success(res));
     } catch (error) {
         yield put(fail());
     }

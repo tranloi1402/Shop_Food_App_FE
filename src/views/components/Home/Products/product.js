@@ -3,23 +3,26 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 const Product = ({ product, addToCart }) => (
-    <div className='max-w-xs bg-white shadow-lg rounded-lg overflow-hidden cursor-pointer transform hover:scale-105 duration-300 ease-in-out'>
+    <div
+        className='sm:mx-auto max-w-xs bg-white border shadow-lg rounded-lg z-10 mb-3
+                    cursor-pointer transform hover:scale-105 duration-300 ease-in-out'
+    >
         <Link to={`/product/${product._id}`}>
             <div className='px-4 h-28 py-2'>
-                <h1 className='text-gray-900 font-bold text-2xl uppercase'>{product.name}</h1>
+                <h1 className='text-gray-900 font-bold xl:text-2xl md:text-xl uppercase'>{product.name}</h1>
                 <p className='text-gray-600 min-h-80 text-sm mt-1'>{product.description}</p>
             </div>
         </Link>
         <div className='mt-auto flex-shrink-0'>
             <Link to={`/product/${product._id}`}>
                 <img
-                    className='h-56 w-80 object-cover mt-2'
+                    className='md:h-56 h-52 w-full object-cover mt-2'
                     src={`${product.image}`}
                     alt={`${product.name}`}
                 />
             </Link>
-            <div className='flex items-center justify-between px-4 py-2 bg-gray-900'>
-                <h1 className='text-gray-200 font-bold text-xl'>
+            <div className='flex items-center justify-between px-4 py-2 bg-gray-900 rounded-b-lg'>
+                <h1 className='text-gray-200 font-bold xl:text-xl md:text-lg'>
                     {`${product.price} VĐN`}
                 </h1>
                 <div

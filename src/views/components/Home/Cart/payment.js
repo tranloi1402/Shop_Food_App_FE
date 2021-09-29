@@ -6,9 +6,9 @@ const Payment = ({ isCheck, onSubmitPayment }) => {
     const [phone, setPhone] = useState();
     const [address, setAddress] = useState();
     return (
-        <div className={isCheck === true ? 'w-2/3 mx-auto block delay-1000' : 'w-2/3 mx-auto hidden'}>
-            <form onSubmit={() => {
-                // e.preventDefault();
+        <div className={isCheck === true ? 'sm:w-2/3 mx-auto block delay-1000' : 'hidden'}>
+            <form onSubmit={(e) => {
+                e.preventDefault();
                 onSubmitPayment(name, phone, address);
             }}
             >
@@ -74,7 +74,7 @@ const Payment = ({ isCheck, onSubmitPayment }) => {
                     className='
                     my-6 cursor-pointer py-2 px-4 block mt-6
                     bg-yellow-500 text-white font-bold
-                    w-full text-center rounded'
+                    w-full text-center rounded focus:outline-none'
                 >
                     Đặt hàng
                 </button>

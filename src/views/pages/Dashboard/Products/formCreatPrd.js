@@ -8,6 +8,7 @@ import { categoryActions, categorySelectors } from '../../../../state/modules/ca
 
 const FormCreatPrd = () => {
     const dispatch = useDispatch();
+    const [message, setMessage] = useState(1);
     const [newProduct, setNewProduct] = useState({
         name: '',
         description: '',
@@ -18,16 +19,9 @@ const FormCreatPrd = () => {
     });
 
     const onSubmit = useCallback(() => {
-        // console.log('[[newProduct - data]]', newProduct);
+        console.log(newProduct);
+        setMessage(2);
         dispatch(productActions.createProduct(newProduct));
-        setNewProduct({
-            name: '',
-            description: '',
-            image: '',
-            price: '',
-            categoryID: '',
-            status: ''
-        });
     }, [newProduct, dispatch]);
 
     const categorys = useSelector(categorySelectors.categories);
@@ -35,14 +29,32 @@ const FormCreatPrd = () => {
         dispatch(categoryActions.getAllCate());
     }, [dispatch]);
 
+    useEffect(() => {
+        setTimeout(() => {
+            setMessage(1);
+        }, 5000);
+    }, [message]);
+
     return (
         <div className='h-full ml-14 mt-14 mb-10 md:ml-64'>
             <div>
                 <h2 className='ml-6 mt-4 text-xl font-semibold text-gray-500'>Thêm mới sản phẩm</h2>
             </div>
+            <div
+                className={(message !== 1) ? 'fixed top-12 right-3 shadow-lg mt-2 z-40' : 'hidden'}
+            >
+                <div className='bg-red-100 rounded-lg mt-5 border py-2 px-4'>
+                    <i className={
+                        message === 2 ? 'far fa-check-circle pr-3 text-green-500 text-xl font-semibold'
+                            : 'fas fa-times pr-3 text-red-500 text-xl font-semibold'
+                    }
+                    />
+                    <span className='font-semibold'>{message === 2 ? 'Thêm mới thành Công!!!' : message}</span>
+                </div>
+            </div>
             <div className='m-10 p-2 bg-white border rounded-xl shadow-2xl z-10'>
-                <form onSubmit={() => {
-                    // e.preventDefault();
+                <form onSubmit={(e) => {
+                    e.preventDefault();
                     onSubmit();
                 }}
                 >
@@ -140,7 +152,7 @@ const FormCreatPrd = () => {
                     </div>
                     <button
                         type='submit'
-                        className='cursor-pointer py-2 px-4 block mx-6 my-3 text-white font-bold text-center rounded add'
+                        className='cursor-pointer py-2 px-4 block mx-6 my-3 text-white font-bold text-center rounded add focus:outline-none'
                     >
                         Thêm mới
                     </button>

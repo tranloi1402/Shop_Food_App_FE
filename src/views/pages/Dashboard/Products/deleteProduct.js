@@ -13,8 +13,6 @@ const DeleteProduct = () => {
     const dispatch = useDispatch();
     const [products, setProducts] = useState([]);
     const prodSelectors = useSelector(productSelectors.getAllProducts);
-    // console.log('[[ prodSelectors ]]', prodSelectors);
-    // console.log('[[id]]', idProduct);
 
     useEffect(() => {
         dispatch(productActions.deleteProduct(idProduct.id));

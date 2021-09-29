@@ -17,6 +17,7 @@ const ALL_CATE = 'category/ALL_CATE';
 const STORE_CATE = 'category/STORE_CATE';
 const SUCCESS = 'category/SUCCESS';
 const FAIL = 'category/FAIL';
+const LOADING = 'category/LOALOADING';
 
 export default {
     CREAT_CATE,
@@ -30,5 +31,6 @@ export default {
     ALL_CATE,
     STORE_CATE,
     SUCCESS,
-    FAIL
+    FAIL,
+    LOADING
 };

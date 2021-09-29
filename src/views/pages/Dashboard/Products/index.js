@@ -11,8 +11,8 @@ import { productActions, productSelectors } from '../../../../state/modules/prod
 const Index = () => {
     const [products, setProducts] = useState([]);
     const prodSelectors = useSelector(productSelectors.getAllProducts);
-    // console.log('[[ prodSelectors ]]', prodSelectors);
-    // console.log('[[ product ]]', product);
+    const loading = useSelector(productSelectors.loading);
+
     useEffect(() => {
         setProducts(prodSelectors);
     }, [prodSelectors]);
@@ -35,7 +35,7 @@ const Index = () => {
             <div className='min-h-screen flex flex-col flex-auto flex-shrink-0 antialiased bg-white dark:bg-gray-700 text-black dark:text-white'>
                 <Header />
                 <Sliderbar />
-                <Products products={products} />
+                <Products products={products} loading={loading} />
             </div>
         </div>
     );

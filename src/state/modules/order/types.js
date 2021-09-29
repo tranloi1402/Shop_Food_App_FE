@@ -10,6 +10,8 @@ const UPDATE_ORDER = 'order/UPDATE_ORDER';
 const STORE_ORDER = 'order/STORE_ORDER';
 const SUCCESS = 'order/SUCCESS';
 const FAIL = 'order/FAIL';
+const LOADING = 'order/LOADING';
+const STOP_LOADING = 'order/STOP_LOADING';
 
 export default {
     GET_ALL_ORDER,
@@ -19,5 +21,7 @@ export default {
     STORE_ORDER,
     UPDATE_ORDER,
     SUCCESS,
-    FAIL
+    FAIL,
+    LOADING,
+    STOP_LOADING
 };

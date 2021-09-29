@@ -15,6 +15,7 @@ const ProductCate = () => {
     const dispatch = useDispatch();
     const products = useSelector(productSelectors.getAllProducts);
     const categories = useSelector(categorySelectors.categories);
+    const loading = useSelector(productSelectors.loading);
     // console.log(products);
     // console.log(categories);
     useEffect(() => {
@@ -54,11 +55,13 @@ const ProductCate = () => {
             const check = cartsList.filter((item) => item._id === _id);
             if (check.length === 0) {
                 setCartList([...cartsList, { _id, name, image, price, quantity: 1 }]);
+                setMessage(2);
             } else {
                 setMessage('Bạn đã có sản phẩm này trong giỏ hàng !!!!!');
             }
         } else {
             setCartList([{ _id, name, image, price, quantity: 1 }]);
+            setMessage(2);
         }
     };
     useEffect(() => {
@@ -75,38 +78,63 @@ const ProductCate = () => {
                     message ? 'fixed top-12 right-3 shadow-lg mt-2 z-40' : 'hidden'
                 }
             >
-                <div className='bg-red-200 rounded-lg mt-5 border py-2 px-4'>
+                <div
+                    className={
+                        message !== 2 ? 'bg-red-200 rounded-lg mt-5 border py-2 px-4'
+                            : 'bg-green-200 rounded-lg mt-5 border py-2 px-4'
+                    }
+                >
                     <i
-                        className='fas fa-times text-red-500 pr-3 text-xl font-semibold'
+                        className={
+                            message === 2 ? 'far fa-check-circle pr-3 text-green-500 text-xl font-semibold'
+                                : 'fas fa-times pr-3 text-red-500 text-xl font-semibold'
+                        }
                     />
                     <span className='font-semibold'>
-                        {message}
+                        {message === 2 ? 'Thêm thành công vào giỏ hàng!!!' : message}
                     </span>
                 </div>
             </div>
-            <div className='container mx-auto sm:my-10 mt-20 overflow-hidden'>
-                <div className='text-center mt-16'>
-                    <h1 className='text-gray-900 font-bold text-3xl uppercase'>
-                        Danh sách sản phẩm:
-                        <span className='capitalize px-3'>
-                            {
-                                (nameCate && nameCate.length > 0) ? nameCate.map((cate) => (
-                                    `${cate.name}`
-                                )) : ''
-                            }
-                        </span>
-                    </h1>
-                    <h1 className={(productCate && productCate.length > 0) ? 'hidden' : 'text-red-500 font-medium m-10 text-xl'}>
-                        Sản phẩm theo danh mục hiện tại trống!!!!
-                    </h1>
+            <div className='container mx-auto sm:my-20 mt-20 overflow-hidden'>
+                <div className='text-center'>
+                    {
+                        loading ? '' : (
+                            <h1 className='text-gray-900 font-bold xl:text-3xl md:text-xl text-lg uppercase py-3'>
+                                Danh sách sản phẩm:
+                                <span className='capitalize px-3'>
+                                    {
+                                        (nameCate && nameCate.length > 0) ? nameCate.map((cate) => (
+                                            `${cate.name}`
+                                        )) : ''
+                                    }
+                                </span>
+                            </h1>
+                        )
+                    }
                 </div>
-                <div className='grid justify-items-center mx-auto lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 py-10 gap-10 mt-2'>
+                {/* {
+                    loading ? <h1 className='text-lg font-medium py-2 text-center'>Đang tải.....</h1> : ''
+                } */}
+                <div
+                    className='grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1
+                                py-6 xl:gap-10 md:gap-5 mt-2 justify-center'
+                >
                     {
                         (productCate && productCate.length > 0) ? productCate.map((product, idx) => (
                             <Product key={idx} product={product} addToCart={addToCart} />
                         )) : ''
                     }
                 </div>
+                {
+                    (productCate && productCate.length > 0) ? ''
+                        : (
+                            <h1 className='text-red-500 font-medium text-lg px-5 text-center'>
+                                {
+                                    loading ? '' : 'Sản phẩm theo danh mục hiện tại trống!!!!'
+                                }
+                            </h1>
+                        )
+                }
             </div>
             <Footer />
         </div>

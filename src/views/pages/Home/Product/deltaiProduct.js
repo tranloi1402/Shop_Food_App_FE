@@ -13,6 +13,7 @@ const CART_STORE_KEY = 'LIST_CART';
 const DeltaiProduct = () => {
     const prdID = useParams();
     const dispatch = useDispatch();
+    const loading = useSelector(productSelectors.loading);
 
     useEffect(() => {
         dispatch(productActions.editProduct(prdID.id));
@@ -81,7 +82,7 @@ const DeltaiProduct = () => {
                     </span>
                 </div>
             </div>
-            <InfProduct product={product} addToCart={addToCart} />
+            <InfProduct product={product} addToCart={addToCart} loading={loading} />
             <EvaluateProd />
             <Footer />
         </div>

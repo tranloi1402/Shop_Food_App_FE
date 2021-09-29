@@ -49,8 +49,8 @@ const Header = () => {
         <header className='min-w-full fixed z-30 top-0'>
             <nav className='bg-white shadow-lg'>
                 <div className='container mx-auto'>
-                    <div className='flex justify-between '>
-                        <div className='flex space-x-7'>
+                    <div className='flex justify-between'>
+                        <div className='flex'>
                             <div className='flex justify-start sm:hidden ml-2'>
                                 <button
                                     onClick={() => onClickBtn()}
@@ -60,17 +60,21 @@ const Header = () => {
                                     <i className='fas fa-bars' />
                                 </button>
                             </div>
-                            <div>
+                            <div className='my-auto'>
                                 {/* <!-- Website Logo --> */}
-                                <a href='/' className='flex items-center py-4 sm:px-2'>
-                                    <img src='logo.png' alt='Logo' className='h-8 w-8 mr-2' />
-                                    <span className='font-semibold text-gray-500 text-lg'>Shop</span>
+                                <a href='/' className='flex items-center xl:mr-4 md:px-2 pl-8'>
+                                    <img
+                                        src='https://20i9ea3qmneuwphgwbjhfu16-wpengine.netdna-ssl.com/wp-content/uploads/2021/05/logo-2.jpg'
+                                        alt='Logo'
+                                        className='h-12 md:h-8'
+                                    />
+                                    {/* <span className='font-semibold text-gray-500 text-lg'></span> */}
                                 </a>
                             </div>
                         </div>
-                        <div className='mr-auto md:pl-4 hidden md:block'>
+                        <div className='mr-auto md:lg-4 hidden md:block'>
                             <ul className='flex h-full'>
-                                <li className='text-xl tex-gray-500 font-medium px-6 hover:text-yellow-500 transition delay-100'>
+                                <li className='text-xl tex-gray-500 font-medium lg:px-6 md:px-1 hover:text-yellow-500 transition delay-100'>
                                     <a href='/' className='line-height'>Trang chủ</a>
                                 </li>
                                 <li id='dropDown' className='text-xl relative tex-gray-500 font-medium px-6'>
@@ -101,7 +105,8 @@ const Header = () => {
                                     onChange={(e) => setKeyword(e.target.value.trim())}
                                     type='text'
                                     name='keyword'
-                                    className='w-full hidden sm:block focus:outline-none bg-purple-white  py-2 px-4 text-lg'
+                                    className='lg:w-full md:w-48 hidden sm:block focus:outline-none bg-purple-white
+                                    py-2 px-4 text-lg '
                                     placeholder='Tìm kiếm...'
                                 />
                             </div>

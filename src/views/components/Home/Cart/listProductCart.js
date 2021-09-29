@@ -6,15 +6,15 @@ const ListProductCart = ({ item, deleteCart, onChangeUpdate }) => {
     return (
         <tr>
             <td>
-                <div className='flex'>
-                    <img src={item.image} className='lg:w-20 md:w-12 w-8 rounded' />
-                    <div className='ml-2'>
-                        <p className='text-lg my-3 md:ml-4'>{item.name}</p>
+                <div className='sm:flex block'>
+                    <img src={item.image} className='lg:w-20 w-12 mx-auto sm:mx-0 rounded' />
+                    <div className='sm:ml-2'>
+                        <p className='text-lg sm:my-3 mb-3 sm:p-0 pb-2 text-center md:ml-4'>{item.name}</p>
                     </div>
                 </div>
             </td>
             <td className='text-center md:table-cell'>
-                <span className='text-lg lg:text-base font-medium'>
+                <span className='text-md md:text-base font-medium'>
                     {`${item.price} VNĐ`}
                 </span>
             </td>
@@ -28,7 +28,7 @@ const ListProductCart = ({ item, deleteCart, onChangeUpdate }) => {
                         }}
                         type='number'
                         placeholder={item.quantity}
-                        className='bg-gray-200 w-16 focus:outline-none rounded-md px-3 py-1'
+                        className='bg-gray-200 sm:w-16 w-8 focus:outline-none rounded-md sm:px-3 px-1 py-1'
                     />
                 </span>
             </td>

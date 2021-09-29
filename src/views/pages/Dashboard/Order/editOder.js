@@ -10,6 +10,7 @@ import FormEditOrder from './fromEditOrder';
 const EditOder = () => {
     const idOrder = useParams();
     const dispatch = useDispatch();
+    const loading = useSelector(orderSelectors.loading);
 
     useEffect(() => {
         dispatch(orderActions.editOrder(idOrder.id));
@@ -17,7 +18,6 @@ const EditOder = () => {
     const order = useSelector(orderSelectors.dataEdit);
 
     const onSubmitUpdate = (data) => {
-        console.log('[ data update ]', data);
         dispatch(orderActions.updateOrder(data));
     };
 
@@ -37,6 +37,7 @@ const EditOder = () => {
                 <FormEditOrder
                     order={order}
                     onSubmitUpdate={onSubmitUpdate}
+                    loading={loading}
                 />
             </div>
         </div>

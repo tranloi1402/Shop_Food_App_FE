@@ -37,7 +37,7 @@ const Header = () => {
                 </div>
                 <div className='flex justify-between items-center w-full h-16'>
                     <div className='ml-16 px-1'>
-                        <img src='logo.png' alt='Logo Shop' className='my-auto' />
+                        <h1 className='text-2xl font-medium text-white'>Admin</h1>
                     </div>
                     <div id='dropDown' className='ml-auto relative leading-loose'>
                         <div className='flex md:mr-10 mr-7 h-14 py-3 capitalize hover-yellow'>
